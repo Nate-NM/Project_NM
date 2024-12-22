@@ -22,3 +22,5 @@ All that being said, I'd like to approach this in 2 steps.
    - sudo apt-get install hostapd , sudo systemctl unmask hostapd , sudo systemctl enable hostapd
    - sudo apt install batctl bridge-utils and remember you need to sudo modprobe batman-adv every boot
    - 
+
+   test update from VS code
