@@ -20,4 +20,5 @@ All that being said, I'd like to approach this in 2 steps.
    - Fresh install of bookworm 64 bit lite, apt update/upgrade
    - sudo rfkill block bluetooth
    - sudo apt-get install hostapd , sudo systemctl unmask hostapd , sudo systemctl enable hostapd
+   - sudo apt install batctl bridge-utils and remember you need to sudo modprobe batman-adv every boot
    - 
