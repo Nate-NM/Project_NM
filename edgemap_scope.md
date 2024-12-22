@@ -9,8 +9,8 @@ Some
 ~~1. Be able to talk to the Teledatics TD-XPAH Halow boards, drivers are brought in via DKMS module currently on Pi-OS.
      --a. As a stretch goal here, I'd love to customize their scripts/drivers here to allow me to wire these units directly in via the SPI pins. Allegedly possible, but I've not had luck so far. Otherwise ## current USB connection will work~~
 
-After a bunch of testing the last few days. i think i want to drop the Halow board for now, at least until we find something with more power. range is not much,if any, improved from the 
-Alfa 2.4/5.9 GHz units and throughput is much much worse. plus all the tweaking needed to keep things like packet aggregation working , its just too finicky. I think i want to fall back to
+1. After a bunch of testing the last few days. i think i want to drop the Halow board for now, at least until we find something with more power. range is not much,if any, improved from the 
+Alfa 2.4/5.8 GHz units and throughput is much much worse. plus all the tweaking needed to keep things like packet aggregation working , its just too finicky. I think i want to fall back to
 a good powerful wifi card and a LoRa radio. Have both in operation and fall back to the Lora card when WiFi cuts out 
 
 2. Mesh communication   
