@@ -1,5 +1,13 @@
 # Project_NM
 
+12/23/24
+Options for hardware
+1. Alfa wifi adapter. ACHM should work, ACH with 2x2 mimo as an option.
+2. Teledatics TD-XPAH. Current configuration, low bandwidth and not too happy with range. Networking required quite a bit of tweaking, external drivers etc
+3. Alfa wifi adapter with additional LoRa radio. Would require sorting out MT python package,  not sure how that could tie together with wifi network. for now may have to use MT plugin and just have hardware in case
+
+
+
 12/22/24
 After some pretty heavy work over the last few weeks working on the Teledatics TD-XPAH I finally seem to have solved the packet aggregation issue with the 1.5.2 version of the software
 but it feels like tx power just isn't there. I've tried a large variety of good antennas, tired many many test runs and i believe tx power is holding this unit back badly.
