@@ -3,7 +3,7 @@
 12/23/24
 Options for hardware
 1. Alfa wifi adapter. ACHM should work, ACH with 2x2 mimo as an option.
-2. Teledatics TD-XPAH. Current configuration, low bandwidth and not too happy with range. Networking required quite a bit of tweaking, external drivers etc
+2. Teledatics TD-XPAH. Current configuration, low bandwidth and not too happy with range. Networking required quite a bit of tweaking, external drivers etc. need to look at direct SPI connection, may help bandwidth quite a bit
 3. Alfa wifi adapter with additional LoRa radio. Would require sorting out MT python package,  not sure how that could tie together with wifi network. for now may have to use MT plugin and just have hardware in case
 
    - Immediate action items.
