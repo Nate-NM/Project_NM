@@ -9,6 +9,8 @@ sudo make dkms_install
 
 if multiple wifi interfaces, see udev rules for consistent interface naming
 
+dont forget to enable systemd-networkd
+
 
 
 12/22/24
