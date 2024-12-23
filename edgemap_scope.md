@@ -5,7 +5,7 @@ Based on our discussions over the last 24 hours it sounds like a semi-custom Edg
 Obviously there is a lot of detail to sort out on compensation, amount of time youre willing to spend on this. But per the last few notes, I just wanted to drop a target use case for this initial version, with hopes to expand in the future.
 
 The primary use case for this hardware will be MANET nodes. Ideally a 2 interface solution, WiFi on an 802.11s Mesh (potentiall with Batman-adv routing) and a LoRa radio for when Wifi is out of range
-For now I am leaning away from the Teledatics units. too finicky and low TX power/bandwidth 
+For now I am leaning away from the Teledatics units. too finicky and low TX power/bandwidth <br>
 Target capabilities
 1. utilize WiFi hardware (Likely Alfa AWUS016ACHM) in a mesh configuration.
 2. Interface with LoRa radio for Meshtastic integration
