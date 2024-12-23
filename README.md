@@ -1,4 +1,15 @@
 # Project_NM
+12/23/24
+rtl8812au driver install
+sudo apt update
+sudo apt install build-essential dkms bc linux-headers-$(uname -r)
+git clone https://github.com/aircrack-ng/rtl8812au.git
+cd rtl8812au
+sudo make dkms_install
+
+if multiple wifi interfaces, see udev rules for consistent interface naming
+
+
 
 12/22/24
 After some pretty heavy work over the last few weeks working on the Teledatics TD-XPAH I finally seem to have solved the packet aggregation issue with the 1.5.2 version of the software

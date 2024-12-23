@@ -1,0 +1,2 @@
+SUBSYSTEM=="net", ACTION=="add", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="8812", NAME="wlan_rtl"
+SUBSYSTEM=="net", ACTION=="add", ATTRS{idVendor}=="0e8d", ATTRS{idProduct}=="7610", NAME="wlan_mt"
