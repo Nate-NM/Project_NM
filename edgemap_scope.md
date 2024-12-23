@@ -17,8 +17,7 @@ Target capabilities
 8. Look at video if thats an option, obviously would only be able to happen on wifi connection
 9. Mesh monitoring (believe this is already in, maybe just display TQ (from batman-adv) between nodes, at least on wifi?)
 
-I think I'd like a pretty stripped down build for this particular hardware. Once some funding is rolling in I definitely want to dig into a much more feature complete piece of hardware to leverage all
-the capabilities you've created.
+It seems like most of this capability is already there,I think I'd like a pretty stripped down build for this particular hardware. Once some funding is rolling in I definitely want to dig into a much more feature complete piece of hardware to leverage all the capabilities you've created. 
 
 I think the primary question is whwther you'd even be interested in this kind of build, and if you are, how can we compensate you for your time?
 I've got a few groups interested in the current solution, but I really do think Edgemap could really set this hardware apart.
