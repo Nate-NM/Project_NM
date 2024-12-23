@@ -10,8 +10,8 @@ Target capabilities
 1. utilize WiFi hardware (Likely Alfa AWUS016ACHM) in a mesh configuration.
 2. Interface with LoRa radio for Meshtastic integration
 3. self marker
-4. High rate marker update, at least on Wifi
-5. Team member position (can this switch between wifi/Lora automatically?)
+4. High rate team member marker update, at least on Wifi
+5. Team member position (can this switch between wifi/Lora automatically? and understand this requires GPS dongle on each pi)
 6. Send standard marker set (again, not sure how to decide what interface these go out over)
 7. Send text/pictures between members (can picture locations be marked on map??)
 8. Look at video if thats an option, obviously would only be able to happen on wifi connection
