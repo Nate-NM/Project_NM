@@ -6,6 +6,13 @@ Options for hardware
 2. Teledatics TD-XPAH. Current configuration, low bandwidth and not too happy with range. Networking required quite a bit of tweaking, external drivers etc
 3. Alfa wifi adapter with additional LoRa radio. Would require sorting out MT python package,  not sure how that could tie together with wifi network. for now may have to use MT plugin and just have hardware in case
 
+   - Immediate action items.
+   - Quick and dirty range testing. confirm 802.11s/Batman will work with these wifi adapters
+   - Get latest Edgemap image on existing hardware with wifi adapters. need to sort out how to handle the networking there, make sure drivers work etc
+   - Goal for the 11th will likely be current 802.11s/batman software configuration. But need to make the call on 2.4/5.8 or Halow based on quick and dirty range testing.
+   - Need to set potential investor meeting up after walt up to speed and we have some documentation
+   - Continue to nail down scope for Edgemap, confirm that "custom" image is even an option
+
 
 
 12/22/24
