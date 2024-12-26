@@ -19,5 +19,8 @@ Target capabilities
 
 It seems like most of this capability is already there,I think I'd like a pretty stripped down build for this particular hardware. Once some funding is rolling in I definitely want to dig into a much more feature complete piece of hardware to leverage all the capabilities you've created. 
 
-I think the primary question is whwther you'd even be interested in this kind of build, and if you are, how can we compensate you for your time?
+I think the primary question is whether you'd even be interested in this kind of build, and if you are, how can we compensate you for your time?
 I've got a few groups interested in the current solution, but I really do think Edgemap could really set this hardware apart.
+
+12/26/24 notes
+It is looking like the Alfa AWUS036ACHM will be the wifi board for this hardware revision. Will be proving the system out using OpenWRT to control the wifi mesh (I had some issues with the drivers using raspi-OS), and co-locating a meshtastic node in the case with its own separate antenna. This stage will be pretty inefficient as I'll need to have the pairing to the meshtastic node over BT on top of connecting to the pi over a wifi hotspot. The hope with the Edgemap integration would obviously be to have interface for the wifi and LoRa via one connection. For software it'll just be ATAK with the Meshtastic plugin to let us combine data from both radios. Will make sure everything is talking over the next few days, will have to update the case design early next week. I've got a trip out to some private land for a hunting trip scheduled for Jan 11th with a few guys so will be putting the equipment through it's paces there to get some idea of hardware performance
