@@ -22,5 +22,6 @@ OpenWRT on the pi enabling 802.11s mesh and wifi hotspot bridge to mesh for EUD 
 EUD running ATAK w/Meshtastic plug in paired to LoRa radio.
 ### Planned iteration
 Edgemap with direct serial connection to lora radio, onboard drivers for awus036achm provisions for reticulum over ethernet maybe, what else would be a good fit
+would like to sort out awus036ach driver issue to get mimo wifi, and then longer term, custom board with nrc7394 halow module at 1 w
 
 see scope document in this repo
