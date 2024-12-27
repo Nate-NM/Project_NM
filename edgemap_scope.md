@@ -7,7 +7,7 @@ Obviously there is a lot of detail to sort out on compensation, amount of time y
 The primary use case for this hardware will be MANET nodes. Ideally a 2 interface solution, WiFi on an 802.11s Mesh (potentiall with Batman-adv routing) and a LoRa radio for when Wifi is out of range
 For now I am leaning away from the Teledatics units. too finicky and low TX power/bandwidth <br>
 Target capabilities
-1. utilize WiFi hardware (Likely Alfa AWUS016ACHM) in a mesh configuration.
+1. utilize WiFi hardware (Likely Alfa AWUS016ACHM) in a mesh configuration. awus036ach may be nice, but drvers are a problem
 2. Interface with LoRa radio for Meshtastic integration
 3. self marker
 4. High rate team member marker update, at least on Wifi
