@@ -1,10 +1,31 @@
+search device info by fcc id at
+https://www.fcc.gov/oet/ea/fccid
+
+
+
+
 # Alfa AWUS036ACH https://apps.fcc.gov/oetcf/eas/reports/GenericSearchResult.cfm?RequestTimeout=500 <br>
 looks like its 30dbm at 2.4GHz, 23 DBM at 5 GHz  https://apps.fcc.gov/eas/GetApplicationAttachment.html?id=3619064
 but having driver issues, cannot seem to get this over 14 dbm per power meter. there are several river options, morrownr, aircrack and rtw88 are the main ones it 
 seems
 
-# awus036achm
+# awus036achm fcc id 2AB877610
 had some issues using this with normal linux, but am seeing 30dbm on 2.4 ghz using openwrt. but in the 5 ghz range, it will not form a
 mesh at some of the higher channels. and while it will mesh at some of the lower 5ghz channels, my power meter doesnt
-work in that range, so not sure what the 5ghz power is
+work in that range, so not sure what the 5ghz power 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
