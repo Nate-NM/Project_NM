@@ -10,7 +10,7 @@ several on site personnel. Ideal condition would be drone footage to on site res
 
 
 ## Hardware
-1. Main Wi-Fi Radio: alfa awus036achm
+1. Main Wi-Fi Radio: alfa awus036achm (transitioning away from Teledatics td-xpah if alfa range even close to equivalent)
 2. LoRa Radio: rak19007
 3. SBC: pi4 4gb
 4. Antenna: female n type adapter for both 5 ghz an 900 mhz
@@ -26,7 +26,7 @@ would like to sort out awus036ach driver issue to get mimo wifi, and then longer
 
 see scope document in this repo
 
-
+900 mhz iteration with updated n type antenna
 ![PXL_20241220_234526984](https://github.com/user-attachments/assets/27e5b868-8f40-4aa4-a98b-324580f52b3d)
 
 
