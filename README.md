@@ -1,4 +1,5 @@
 # Project_NM
+Look at using babeld for rounting instead of batman
 
 ## current hardware
 
