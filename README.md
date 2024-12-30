@@ -2,7 +2,10 @@
 12/30/24 notes
 1. after discord conversation, for ease of implementation remove all teledatics drivers and follow the newracom package for direct pin to pin SPI connection
 2. Look at the notes on HWMP possibly still running under batman, maybe some of the throughput problem??
-3. Look into babeld, some interesting notes on using that on top of a AP/STA config, but also could be a good replacement for batman
+3. Look into babeld, some interesting notes on using that on top of a AP/STA config, but also could be a good replacement for batman. based on iw info output, it looks like the xpah can handle a virtual interface
+   "valid interface combinations:
+		 * #{ managed, AP, mesh point } <= 2,
+		   total <= 2, #channels <= 1, STA/AP BI must match, radar detect widths: { 20 MHz (no HT), 20 MHz, 40 MHz, 80 MHz, 160 MHz }"
 
 https://www.ewsn.org/file-repository/ewsn2024/ewsn2024posters-final16.pdf
 
