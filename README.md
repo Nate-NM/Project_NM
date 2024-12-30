@@ -1,5 +1,8 @@
 # Project_NM
-Look at using babeld for rounting instead of batman
+12/30/24 notes
+1. after discord conversation, for ease of implementation remove all teledatics drivers and follow the newracom package for direct pin to pin SPI connection
+2. Look at the notes on HWMP possibly still running under batman, maybe some of the throughput problem??
+3. Look into babeld, some interesting notes on using that on top of a AP/STA config, but also could be a good replacement for batman
 
 ## current hardware
 
