@@ -1,0 +1,86 @@
+# AP/STA + Layer 3 Routing: High-Level Overview
+
+## Introduction
+
+In a typical Wi-Fi “mesh” setup, one might use either:
+- 802.11s (mesh mode), or
+- IBSS (ad-hoc mode).
+
+However, some hardware drivers either lack mature support for these modes or do not allow robust features like packet aggregation when in mesh or ad-hoc. An alternative is to use the standard Wi-Fi infrastructure mode (AP/STA) on each node, and then layer a routing protocol (e.g., Babel) on top at Layer 3.
+
+This document provides a **high-level overview** of how and why this works.
+
+---
+
+## Key Concepts
+
+### AP/STA Mode
+- **Access Point (AP)**: The normal Wi-Fi mode that broadcasts an SSID and accepts client associations.
+- **Station (STA)**: The normal Wi-Fi client mode that associates to an AP.
+  
+### Multiple Roles on One Device
+Modern Wi-Fi chipsets often support multiple virtual interfaces (VIFs). Each node can act as:
+- **An AP** (hosting a network), and
+- **A Station** (connecting to neighboring APs).
+
+### Layer 3 Routing Protocol
+- Instead of relying on Layer 2 mesh routing (like 802.11s + HWMP or batman-adv), we run a **distance-vector or link-state routing daemon** in user space. Examples: Babel, OLSR, or BMX7.
+- Each node discovers IP neighbors over these AP/STA links and calculates multi-hop routes as needed.
+
+---
+
+## Why Use AP/STA + Layer 3?
+
+1. **Preservation of Wi-Fi Features**  
+   In AP/STA mode, drivers typically enable packet aggregation (A-MPDU, A-MSDU) and other performance optimizations that might be missing or less stable in ad-hoc/mesh modes.
+
+2. **Robust Encryption**  
+   AP/STA mode uses standard WPA2/WPA3 security, which is often easier to configure and more widely tested than mesh-specific security.
+
+3. **Reduced Overhead**  
+   802.11s can be chatty with path discovery at Layer 2; IBSS might not support advanced features. AP/STA can be more efficient if paired with a streamlined Layer 3 protocol.
+
+4. **Driver Maturity**  
+   Many commercial Wi-Fi drivers focus on AP/STA since it’s the most common use case, leading to better stability and more frequent bug fixes.
+
+---
+
+## High-Level Setup Outline
+
+1. **Virtual Interfaces**  
+   - Create two virtual interfaces on each node: one for AP, one for STA.
+   - Assign each interface its own IP or let the routing protocol handle IP auto-configuration (if supported).
+
+2. **AP Interface**  
+   - The node broadcasts an SSID (e.g., `NodeA_AP`).
+   - Security is configured (e.g., WPA2 personal or enterprise).
+
+3. **STA Interface**  
+   - The node’s STA scans for other nodes’ APs.
+   - Upon finding a matching SSID/passphrase, it associates and obtains a Layer 2 connection.
+
+4. **Routing Daemon**  
+   - A Layer 3 protocol (like Babel) runs on the node.
+   - Whenever a STA and AP form a connection, Babel discovers the new IP neighbor, exchanges routing updates, and updates routes accordingly.
+
+---
+
+## Considerations
+
+- **Complexity**  
+  Each node managing both AP and STA can get tricky, especially with more than a handful of nodes.
+  
+- **Channel & SSID Planning**  
+  Nodes typically share a common channel so they can discover each other, but each node might run a different SSID or a shared SSID approach.
+
+- **Scanning Overhead**  
+  In dense environments, scanning for many APs can be time-consuming. Some intelligent logic might be needed to limit associations to a few neighbors at a time.
+
+- **No Single Broadcast Domain**  
+  Because this is Layer 3 routing, you won’t get a “flat” Ethernet-like environment. For many MANET or IoT use cases, this is acceptable or even preferred.
+
+---
+
+## Conclusion
+
+Using **AP/STA + Layer 3 routing** is a creative solution for devices where 802.11s or IBSS modes are either buggy, lack performance features, or create too much overhead. By leveraging the well-trodden path of standard Wi-Fi infrastructure mode, you preserve the full suite of Wi-Fi optimizations. A user-space routing protocol like Babel then ensures multi-hop connectivity without the Layer 2 complexities of mesh or ad-hoc modes.
