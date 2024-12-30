@@ -1,0 +1,68 @@
+# HWMP and Batman-Adv: 802.11s Double Routing Overhead
+
+## Overview
+
+When using 802.11s (the IEEE standard for Wi-Fi mesh networking), **HWMP (Hybrid Wireless Mesh Protocol)** is typically enabled by default. Meanwhile, Batman-adv is another Layer 2 mesh protocol that can operate on top of an 802.11s interface. 
+
+If both are running simultaneously, you might be inadvertently duplicating routing efforts and increasing network overhead—especially problematic in low-bandwidth scenarios.
+
+---
+
+## How This Happens
+
+1. **802.11s Interface Creation**  
+   - When you create a mesh interface via `iw dev wlan0 interface add mesh0 type mesh` and then join a mesh (e.g., `iw dev mesh0 mesh join <SSID>`), the driver usually enables HWMP path discovery by default.
+
+2. **Batman-Adv on Top of Mesh0**  
+   - If you then do `batctl if add mesh0` and bring up `bat0`, you have batman-adv sending its own Originator Messages (OGMs) for topology discovery at Layer 2.
+
+3. **HWMP + OGM**  
+   - HWMP runs within the Wi-Fi driver, sending PREQ, PREP, and other management frames.
+   - Batman-adv runs in the Linux kernel (batman-adv module), sending OGMs and building its own mesh routes.
+   - Both sets of control messages broadcast frequently, consuming airtime.
+
+---
+
+## Why This is a Problem
+
+1. **Double Control Traffic**  
+   - You get “chatty” overhead from both HWMP and batman-adv. On narrow or congested channels, this can significantly reduce useful throughput.
+
+2. **Potential Route Confusion**  
+   - The kernel might have to juggle multiple route tables or bridging logic. Sometimes it works; sometimes route flaps or loops can occur.
+
+3. **Difficulty Tuning**  
+   - Each protocol has its own timers and intervals. Tuning them to coexist can be complex—and often unnecessary if you only need one.
+
+---
+
+## How to Check If HWMP Is Running
+
+- **tcpdump**: 
+  - Capture management frames on the mesh interface:
+    ```bash
+    tcpdump -i mesh0 -y IEEE802_11_RADIO type mgt subtype action
+    ```
+  - If you see `PREQ`, `PREP`, `PERR`, or `RANN` frames, HWMP is definitely active.
+
+- **mesh_fwding=0**:
+  - Some drivers honor `iw dev mesh0 set mesh_param mesh_fwding=0` to disable or reduce HWMP forwarding. However, some might ignore this or only partially reduce HWMP messages.
+
+---
+
+## Possible Solutions
+
+1. **Disable or Reduce HWMP**  
+   - If your driver supports it, turn off mesh forwarding to rely solely on batman-adv.
+
+2. **Use IBSS or AP/STA**  
+   - If 802.11s is buggy or if you can’t disable HWMP, consider using an alternative link mode (IBSS or AP/STA) and let batman-adv or a Layer 3 protocol handle routing.
+
+3. **Use Only HWMP**  
+   - If 802.11s is stable for your setup, you can skip batman-adv altogether and rely on HWMP. This may or may not meet your requirements.
+
+---
+
+## Conclusion
+
+If you set up 802.11s and then layer batman-adv on top without disabling HWMP, you will likely end up with **two overlapping routing protocols**. This can be especially detrimental in low-bandwidth or power-sensitive scenarios. Evaluate whether you can disable HWMP or, if not, consider another approach (like IBSS + batman-adv or a pure Layer 3 solution) to avoid the extra overhead.
