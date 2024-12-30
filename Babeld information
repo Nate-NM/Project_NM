@@ -1,0 +1,102 @@
+# Advantages of Babel and How to Implement It in Your Setup
+
+## Introduction
+
+**Babel** is a highly adaptable routing protocol designed for heterogeneous and wireless networks. It reacts quickly to topology changes and can be tuned for low bandwidth, making it a strong candidate when dealing with portable MANET setups on limited-capacity links like 802.11ah (HaLow).
+
+This document covers:
+1. What makes Babel different.
+2. Why it’s useful for low-throughput wireless.
+3. A general approach to implementing Babel on your current hardware (Raspberry Pi + HaLow radios).
+
+---
+
+## 1. Why Babel?
+
+### A. Fast Convergence
+Babel uses a loop-avoiding distance-vector algorithm with triggered updates, meaning it doesn’t wait for periodic full-table announcements. When link conditions change, route updates propagate quickly.
+
+### B. Efficient on Unstable Links
+Babel was built for environments where links often appear or disappear (e.g., wireless, ad-hoc networks). It can adapt to varying signal quality and packet loss by using metrics like ETX (Expected Transmission Count).
+
+### C. Low Control Traffic (When Tuned)
+By adjusting Babel’s timers (hello intervals, update intervals), you can strike a balance between overhead and convergence speed. In a low-bandwidth scenario, you can set higher intervals and rely on triggered updates for major events, reducing routine chatter.
+
+### D. Layer 3 Simplicity
+Unlike batman-adv or 802.11s (both Layer 2 solutions), Babel handles routing at the IP layer. This often yields simpler interoperability with standard IP tools, firewalls, VPNs, etc. Any link that supports IP can be used by Babel.
+
+---
+
+## 2. Implementing Babel on Raspberry Pi + HaLow
+
+### Hardware/Driver Setup
+1. **HaLow Radio Interface**  
+   - Ensure your HaLow device is recognized by the Raspberry Pi (via SPI, USB, or PCIe).  
+   - Bring it up in a mode that provides a basic IP link. This can be 802.11s, IBSS, or even AP/STA if feasible.
+   
+2. **Kernel Requirements**  
+   - You typically just need a standard Linux kernel. Babel is largely a user-space daemon, so no special kernel modules are required unless you want advanced features.
+
+### Babel Daemon (babeld)
+1. **Installation**  
+   - On Raspberry Pi OS or a similar distro:
+     ```bash
+     sudo apt-get update
+     sudo apt-get install babeld
+     ```
+   - Or build from source (the reference implementation is maintained at https://www.irif.fr/~jch/software/babel/).
+
+2. **Configuration**  
+   - In `/etc/babeld.conf` (or wherever your distro keeps Babel’s config), specify the interfaces on which Babel should run. For example:
+     ```
+     interface halow0 type wireless
+     interface eth0 type wired
+     # Additional settings, filters, etc.
+     ```
+   - You can also tune timers (hello intervals, etc.) and metric parameters if desired.
+
+3. **Running Babel**  
+   - Systemd or init scripts can automatically start the `babeld` daemon at boot.
+   - Confirm it’s running with:
+     ```bash
+     babeld -S   # Shows status
+     ```
+   - You should see Babel neighbors listed when other nodes are up and configured.
+
+### Network Planning
+- **IP Addressing**  
+  - Each Pi + HaLow interface should have a unique IP. You can use a single subnet (with unique addresses per node) or run Babel in an unnumbered mode if you prefer.
+- **Multihop**  
+  - As soon as two Babel nodes see each other at Layer 3, they exchange route announcements. Three or more nodes form a multi-hop network automatically if intermediate links exist.
+
+---
+
+## 3. Tuning Babel for Low-Bandwidth HaLow
+
+1. **Hello Interval**  
+   - Increase the default hello interval (e.g., from 4 seconds to 10 seconds) to reduce routine traffic.
+2. **Update Interval**  
+   - Babel triggers updates on significant metric changes, but you can also raise the periodic update interval to avoid excessive overhead.
+3. **Link Quality Metric**  
+   - If your driver provides link quality or packet loss stats, Babel’s ETX metric can adapt to pick the best route.
+
+---
+
+## 4. Comparing Babel to Batman-Adv or 802.11s
+
+- **Layer**  
+  - Babel: Layer 3.  
+  - Batman-Adv: Layer 2.  
+  - 802.11s/HWMP: Also Layer 2.
+- **Flexibility**  
+  - Babel can run over any IP link. You could have a mixture of wired, wireless, VPN tunnels, etc. in the same mesh.
+- **Overhead**  
+  - Babel generally has *lower overhead* on stable links and uses triggered updates for changes. Batman-adv’s periodic OGMs can be more burdensome in very bandwidth-limited channels.
+- **Broadcast Domain**  
+  - Babel routes at IP, so each node is in its own IP segment or shares a subnet as you prefer. Batman-adv lumps everyone into one L2 domain, which might be simpler for bridging but can create more broadcast traffic.
+
+---
+
+## Conclusion
+
+Babel is an excellent fit for portable, low-bandwidth MANET scenarios where **quick convergence** and **low overhead** are a must. On Raspberry Pi devices with HaLow radios, simply ensure you have a stable IP interface (be it 802.11s, IBSS, or AP/STA), install the `babeld` daemon, configure it to use the relevant interfaces, and let Babel handle multi-hop IP routing. With appropriate timer tuning and metric selection, Babel can outperform many Layer 2 alternatives in challenging wireless environments.
