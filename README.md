@@ -4,6 +4,8 @@
 2. Look at the notes on HWMP possibly still running under batman, maybe some of the throughput problem??
 3. Look into babeld, some interesting notes on using that on top of a AP/STA config, but also could be a good replacement for batman
 
+https://www.ewsn.org/file-repository/ewsn2024/ewsn2024posters-final16.pdf
+
 ## current hardware
 
 900 mhz iteration with updated n type antenna
