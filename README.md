@@ -1,4 +1,8 @@
 # Project_NM
+12/31/24 notes
+HWMP was still running underneath batman. added line on startup script to turn it off. But may be having a board failure on 0ce8. It isnt uncommon for wlan1 (xpah interface) to not come up every time and i saw it cut out on me down south and had extrememly poor results at any kind of distance yesterday to try to get a range test in. Right now going to focus on getting the wifi/lora node built out, then pivot back to the direct SPI connection on the XPAH. then need to sort out whether I've got a bad board or not. Stage 1 will be to get a quick and dirty range test of the wifi boards. if the achm generates useful data rates even at 200-300 meters that may be the choice for the demo run on the 11th
+
+
 12/30/24 notes
 1. after discord conversation, for ease of implementation remove all teledatics drivers and follow the newracom package for direct pin to pin SPI connection
 2. Look at the notes on HWMP possibly still running under batman, maybe some of the throughput problem??
