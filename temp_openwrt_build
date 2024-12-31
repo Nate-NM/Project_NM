@@ -1,0 +1,7 @@
+Install/remove
+1. install wpad mesh
+2. remove wpad basic
+3. install mesh11sd
+4. install kmod-mt76x0u (for awus036achm)
+
+the hotspot need to be "legacy" mode at 2.4 ghz and set to a static channel
